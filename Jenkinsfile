@@ -17,6 +17,7 @@ pipeline {
               sh 'docker -v'
               echo 'project is building'
             }
+        }
             stage('Building Docker Image') {
             steps {
               sh 'docker buit -t my-react-app:1.0 .'
