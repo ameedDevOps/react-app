@@ -20,7 +20,7 @@ pipeline {
         }
             stage('Building Docker Image') {
             steps {
-              sh 'docker buit -t my-react-app:1.0 .'
+              sh 'docker image build -t my-react-app:1.0 .'
             }
         }
         stage('Run-Tests-Parellel') {
