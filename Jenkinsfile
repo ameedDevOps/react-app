@@ -20,7 +20,7 @@ pipeline {
         }
             stage('Building Docker Image') {
             steps {
-              sh 'docker container kill my-react-app:1.0'
+              sh 'docker container --rm my-react-app:1.0'
               sh 'docker image build -t my-react-app:1.1 .'
               sh 'docker container run -dit -p 2222:3000 my-react-app:1.1'
             }
