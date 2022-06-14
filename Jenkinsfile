@@ -9,7 +9,7 @@ pipeline {
         }
         stage('NPM Install') {
             steps {
-                sh 'npm install'
+                echo 'npm install'
             }
         }
         stage('build') {
@@ -21,6 +21,7 @@ pipeline {
             stage('Building Docker Image') {
             steps {
               sh 'docker image build -t my-react-app:1.0 .'
+              sh 'docker container run -dit my-react-app:1.0'
             }
         }
         stage('Run-Tests-Parellel') {
