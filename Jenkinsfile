@@ -14,6 +14,7 @@ pipeline {
         }
         stage('build') {
             steps {
+              sh 'docker -v'
               echo 'project is building'
             }
         }
