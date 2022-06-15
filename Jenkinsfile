@@ -33,7 +33,7 @@ pipeline {
             }
         }
         stage('Push Docker Image in DockerHub') 
-            steps{
+            steps {
             withCredentials([usernamePassword(credentialsId: 'My_Public_Docker', passwordVariable: '', usernameVariable: '')]) {
                 sh "docker login -u ameedqasimi -p ${My_Public_Docker}"
             }
