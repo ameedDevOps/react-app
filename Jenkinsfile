@@ -29,14 +29,14 @@ pipeline {
             steps {
               sh 'docker container rm -f $(docker ps -a -q)'
               sh 'docker image build -t ameedqasimi/my-react-app:1.3 .'
-              sh 'docker container run -dit -p 2222:3000 my-react-app:1.3'
+              sh 'docker container run -dit -p 2222:3000 ameedqasimi/my-react-app:1.3'
             }
         }
         stage('Push Docker Image in DockerHub') {
             steps {
             withCredentials([usernamePassword(credentialsId: 'My_Public_Docker', passwordVariable: 'Ameed@123', usernameVariable: 'ameedqasimi')]) {
                 sh 'docker login -u ameedqasimi -p Ameed@123'
-                sh 'docker push ameedqasimi/my-react-app:1.2'
+                sh 'docker push ameedqasimi/my-react-app'
             }
         }
         }
