@@ -28,8 +28,8 @@ pipeline {
           stage('Building Docker Image') {
             steps {
               sh 'docker container rm -f $(docker ps -a -q)'
-              sh 'docker image build -t ameedqasimi/my-react-app:1.2 .'
-              sh 'docker container run -dit -p 2222:3000 my-react-app:1.2'
+              sh 'docker image build -t ameedqasimi/my-react-app:1.3 .'
+              sh 'docker container run -dit -p 2222:3000 my-react-app:1.3'
             }
         }
         stage('Push Docker Image in DockerHub') {
