@@ -7,13 +7,6 @@ pipeline {
                 git branch: 'main', credentialsId: 'github_node01', url: 'https://github.com/ameedDevOps/react-app.git'
             }
         }
-            stage('Building Docker Image') {
-            steps {
-              sh 'docker container rm -f $(docker ps -a -q)'
-              sh 'docker image build -t my-react-app:1.2 .'
-              sh 'docker container run -dit -p 2222:3000 my-react-app:1.2'
-            }
-        }
         stage('Run-Tests-Parellel') {
                     steps {
                         parallel(
@@ -32,6 +25,21 @@ pipeline {
                             )
                         }                  
                     }
+          stage('Building Docker Image') {
+            steps {
+              sh 'docker container rm -f $(docker ps -a -q)'
+              sh 'docker image build -t my-react-app:1.2 .'
+              sh 'docker container run -dit -p 2222:3000 my-react-app:1.2'
+            }
+        }
+        stage('Push  Docker Image(Public-Repo)') {
+            withCredentials([usernamePassword(credentialsId: 'My_Public_Docker', passwordVariable: '', usernameVariable: '')]) {
+                sh "docker login -u ameedqasimi -p ${My_Public_Docker}"
+        }
+            steps {
+              sh 'docker push my-react-app:1.2'
+            }
+        }
         stage('Deploying') {
         steps {
             parallel( 
