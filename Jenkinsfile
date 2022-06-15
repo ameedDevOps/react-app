@@ -37,9 +37,7 @@ pipeline {
             withCredentials([usernamePassword(credentialsId: 'My_Public_Docker', passwordVariable: '', usernameVariable: '')]) {
                 sh "docker login -u ameedqasimi -p ${My_Public_Docker}"
             }
-           {
               sh 'docker push my-react-app:1.2'
-            }
         }
         stage('Deploying') {
         steps {
