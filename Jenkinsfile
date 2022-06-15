@@ -32,11 +32,12 @@ pipeline {
               sh 'docker container run -dit -p 2222:3000 my-react-app:1.2'
             }
         }
-        stage('Push Docker Image in DockerHub') {
+        stage('Push Docker Image in DockerHub') 
+            steps{
             withCredentials([usernamePassword(credentialsId: 'My_Public_Docker', passwordVariable: '', usernameVariable: '')]) {
                 sh "docker login -u ameedqasimi -p ${My_Public_Docker}"
-        }
-            steps {
+            }
+           {
               sh 'docker push my-react-app:1.2'
             }
         }
