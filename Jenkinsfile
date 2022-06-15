@@ -36,7 +36,7 @@ pipeline {
             steps {
             withCredentials([usernamePassword(credentialsId: 'My_Public_Docker', passwordVariable: 'Ameed@123', usernameVariable: 'ameedqasimi')]) {
                 sh 'docker login -u ameedqasimi -p Ameed@123'
-                sh 'docker push ameedqasimi/my-react-app'
+                sh 'docker push ameedqasimi/my-react-app:1.3'
             }
         }
         }
