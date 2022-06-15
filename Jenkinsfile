@@ -34,8 +34,8 @@ pipeline {
         }
         stage('Push Docker Image in DockerHub') {
             steps {
-            withCredentials([usernamePassword(credentialsId: 'My_Public_Docker', passwordVariable: '', usernameVariable: '')]) {
-                sh "docker login -u ameedqasimi -p ${My_Public_Docker}"
+            withCredentials([usernamePassword(credentialsId: 'My_Public_Docker', passwordVariable: 'Ameed@123', usernameVariable: 'ameedqasimi')]) {
+                sh 'docker login -u ameedqasimi -p Ameed@123'
             }
               sh 'docker push my-react-app:1.2'
             }
