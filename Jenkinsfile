@@ -7,22 +7,11 @@ pipeline {
                 git branch: 'main', credentialsId: 'github_node01', url: 'https://github.com/ameedDevOps/react-app.git'
             }
         }
-        stage('NPM Install') {
-            steps {
-                echo 'npm install'
-            }
-        }
-        stage('build') {
-            steps {
-              sh 'docker -v'
-              echo 'project is building'
-            }
-        }
             stage('Building Docker Image') {
             steps {
-              sh 'docker container rm -f my-react-app:1.0'
-              sh 'docker image build -t my-react-app:1.1 .'
-              sh 'docker container run -dit -p 2222:3000 my-react-app:1.1'
+              sh 'docker container rm -f $(docker ps -a -q)'
+              sh 'docker image build -t my-react-app:1.2 .'
+              sh 'docker container run -dit -p 2222:3000 my-react-app:1.2'
             }
         }
         stage('Run-Tests-Parellel') {
