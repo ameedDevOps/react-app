@@ -44,8 +44,10 @@ pipeline {
             //def dockerRun = ‘docker container run -d -p 2222:3000 --name react-app-demo ameedqasimi/my-react-app:1.5’
         steps {
             parallel( 
-                "first-job": {
-                sh “ssh -o StrictHostKeyChecking=no docker@192.168.0.19 | docker container run -dit -p 2222:3000 ameedqasimi/my-react-app:1.5”
+                "first-job": 
+                sshagent(['Docker_Demo_Server']) {
+                sh 'ssh -o StrictHostKeyChecking=no docker@192.168.0.19'
+                sh 'docker container run -dit -p 2222:3000 ameedqasimi/my-react-app:1.5'
                 },
                 "Second-Job": {
                 echo 'Deploying on Dev'
