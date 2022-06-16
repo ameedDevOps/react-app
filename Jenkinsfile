@@ -41,18 +41,9 @@ pipeline {
         }
         }
         stage('DeploymentOnUAT') {
-            //def dockerRun = ‘docker container run -d -p 2222:3000 --name react-app-demo ameedqasimi/my-react-app:1.5’
-        steps {
-            parallel( 
-                sshagent(['Docker_Demo_Server']) {
+            sshagent(['Docker_Demo_Server']) {
                 sh 'ssh -o StrictHostKeyChecking=no docker@192.168.0.19'
-                sh 'docker container run -dit -p 2222:3000 ameedqasimi/my-react-app:1.5'
-                },
-                "Second-Job": {
-                echo 'Deploying on Dev'
-                sleep 5
-                }
-            )
+                sh 'docker container run -d -p 2222:3000 --name react-demo1 ameedqasimi/my-react-app:1.5'
             }
         }
         stage('Deploy on Prod'){
