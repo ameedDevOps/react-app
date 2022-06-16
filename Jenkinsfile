@@ -47,7 +47,8 @@ pipeline {
             
             steps {
             sshagent(['Docker_Demo_Server']) {
-                sh "ssh -o StrictHostKeyChecking=no docker@192.168.0.19 ${dockerRun}"
+                sh "ssh -o StrictHostKeyChecking=no docker@192.168.0.19 
+                ${dockerRun}"
             }
             }
         }
