@@ -40,12 +40,12 @@ pipeline {
             }
         }
         }
-        stage('Deploying') {
+        stage('DeploymentOnUAT') {
+            def dockerRun = ‘docker container run -d -p 2222:3000 --name react-app-demo ameedqasimi/my-react-app:1.5’
         steps {
             parallel( 
                 "first-job": {
-                echo 'Deploying on Dev'
-                sleep 5
+                sh “ssh -o StrictHostKeyChecking=no docker@192.168.0.19 ${dockerRun}”
                 },
                 "Second-Job": {
                 echo 'Deploying on Dev'
