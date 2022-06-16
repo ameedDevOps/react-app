@@ -43,8 +43,7 @@ pipeline {
         stage('DeploymentOnUAT') {
             steps {
             sshagent(['Docker_Demo_Server']) {
-                sh 'ssh -o StrictHostKeyChecking=no docker@192.168.0.19 uname -a'
-                sh 'docker container run -d -p 2222:3000 --name react-demo1 ameedqasimi/my-react-app:1.5'
+                sh 'ssh -o StrictHostKeyChecking=no docker@192.168.0.19 docker container run -d -p 2222:3000 --name react-demo1 ameedqasimi/my-react-app:1.5'
             }
             }
         }
