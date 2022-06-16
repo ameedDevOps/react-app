@@ -28,8 +28,8 @@ pipeline {
           stage('Building Docker Image') {
             steps {
               sh 'docker container rm -f $(docker ps -a -q)'
-              sh 'docker image build -t ameedqasimi/my-react-app:1.5 .'
-              sh 'docker container run -dit -p 2222:3000 ameedqasimi/my-react-app:1.5'
+              sh 'docker image build -t ameedqasimi/my-react-app:1.6 .'
+              sh 'docker container run -dit -p 2222:3000 ameedqasimi/my-react-app:1.6'
             }
         }
         stage('Push Docker Image in DockerHub') {
@@ -50,9 +50,11 @@ pipeline {
                  //   sh "ssh -o StrictHostKeyChecking=no docker@192.168.0.19 
                // ${dockerRun}"
 }
-                
+             sshagent(['Docker_Demo_Server']) {
+                sh 'ssh -o StrictHostKeyChecking=no docker@192.168.0.19 docker container rm -f $(docker ps -a -q)'
+            }
             sshagent(['Docker_Demo_Server']) {
-                sh 'ssh -o StrictHostKeyChecking=no docker@192.168.0.19 docker container run -d -p 2222:3000 --name react-demo1 ameedqasimi/my-react-app:1.5'
+                sh 'ssh -o StrictHostKeyChecking=no docker@192.168.0.19 docker container run -d -p 2222:3000 --name react-demo1 ameedqasimi/my-react-app:1.6'
             }
             }
         }
