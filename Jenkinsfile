@@ -51,7 +51,7 @@ pipeline {
                // ${dockerRun}"
                //}
              sshagent(['Docker_Demo_Server']) {
-                 sh 'ssh -o StrictHostKeyChecking=no docker@192.168.0.19 docker container rm -f $(docker container ls -a -q)'
+                 sh 'ssh -o StrictHostKeyChecking=no docker@192.168.0.19 docker container rm -f react-demo1'
             }
             sshagent(['Docker_Demo_Server']) {
                 sh 'ssh -o StrictHostKeyChecking=no docker@192.168.0.19 docker container run -d -p 2222:3000 --name react-demo1 ameedqasimi/my-react-app:1.6'
