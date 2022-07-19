@@ -1,1 +1,1 @@
-export const register = 'http://localhost:8080/api/users';
+export const register = 'http://node-app:8080/api/users';
