@@ -28,15 +28,15 @@ pipeline {
           stage('Building Docker Image') {
             steps {
               sh 'docker container rm -f $(docker ps -a -q)'
-              sh 'docker image build -t ameedqasimi/my-react-app:1.6 .'
-              sh 'docker container run -dit -p 2222:3000 ameedqasimi/my-react-app:1.6'
+              sh 'docker image build -t ameeddevops/react-app:1 .'
+              //sh 'docker container run -dit -p 2222:3000 ameeddevops/react-app:1'
             }
         }
         stage('Push Docker Image in DockerHub') {
             steps {
-            withCredentials([usernamePassword(credentialsId: 'My_Public_Docker', passwordVariable: '1fba95b9-09ac-4453-8146-cdc1c6981c03', usernameVariable: 'ameedqasimi')]) {
-                sh 'docker login -u ameedqasimi -p 1fba95b9-09ac-4453-8146-cdc1c6981c03'
-                sh 'docker push ameedqasimi/my-react-app:1.6'
+            withCredentials([usernamePassword(credentialsId: 'My_Public_Docker', passwordVariable: '1fba95b9-09ac-4453-8146-cdc1c6981c03', usernameVariable: 'ameeddevops')]) {
+                sh 'docker login -u ameeddevops -p dckr_pat_sMJsdtubMkQJoxPAHHw4dBFjLSs'
+                sh 'docker push ameeddevops/react-app:1'
             }
         }
         }
@@ -50,11 +50,11 @@ pipeline {
                  //   sh "ssh -o StrictHostKeyChecking=no docker@192.168.0.19 
                // ${dockerRun}"
                //}
-             sshagent(['Docker_Demo_Server']) {
-                 sh 'ssh -o StrictHostKeyChecking=no docker@192.168.0.19 docker container rm -f react-demo1'
+             //sshagent(['Docker_Demo_Server']) {
+                 //sh 'ssh -o StrictHostKeyChecking=no docker@192.168.0.19 docker container rm -f react-demo1'
             }
-            sshagent(['Docker_Demo_Server']) {
-                sh 'ssh -o StrictHostKeyChecking=no docker@192.168.0.19 docker container run -d -p 2222:3000 --name react-demo1 ameedqasimi/my-react-app:1.6'
+            //sshagent(['Docker_Demo_Server']) {
+                //sh 'ssh -o StrictHostKeyChecking=no docker@192.168.0.19 docker container run -d -p 2222:3000 --name react-demo1 ameedqasimi/my-react-app:1.6'
             }
             }
         }
